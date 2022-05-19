@@ -1,0 +1,70 @@
+{
+  "users": [
+    {
+      "name": "john doe",
+      "email": "john@gmail.com",
+      "phone": "97837873445",
+      "address": "UK",
+      "id": 3
+    },
+    {
+      "name": "jenny",
+      "email": "jenny@gmail.com",
+      "phone": "876766688",
+      "address": "Italy",
+      "id": 5
+    },
+    {
+      "name": "julie",
+      "email": "julie@gmail.com",
+      "phone": "83787367",
+      "address": "India",
+      "id": 8
+    },
+    {
+      "name": "Shruti",
+      "email": "shruti.solanki@rlogical.com",
+      "phone": "2134568978",
+      "address": "Rlogical ",
+      "id": 9
+    }
+  ],
+  "products": [
+    { 
+      "id": 1,
+      "name": "product 1",
+      "price": "10",
+      "size": "small",
+      "color": "blue"
+    },
+    {
+      "id": 2,
+      "name": "product 2",
+      "price": "10",
+      "size": "small",
+      "color": "blue"
+    },
+    {
+      "id": 3,
+      "name": "product 3",
+      "price": "10",
+      "size": "small",
+      "color": "blue"
+    },
+    {
+      "id": 4,
+      "name": "product 4",
+      "price": "10",
+      "size": "small",
+      "color": "blue"
+    },
+
+    {
+      "id": 5,
+      "name": "product 5",
+      "price": "10",
+      "size": "small",
+      "color": "blue"
+    }
+  ]
+}
