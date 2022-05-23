@@ -8,6 +8,7 @@ import {
 } from "../redux/actions";
 import { MDBBtn, MDBIcon, MDBSpinner, MDBTooltip } from "mdb-react-ui-kit";
 import MUIDataTable from "mui-datatables";
+// eslint-disable-next-line
 import { Link, Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Modals from "./Model";
@@ -22,7 +23,7 @@ const Home = () => {
   const [UserID, setUserID] = useState(false);
   const [userEmail, setuserEmail] = useState(false);
   const columns = ["id", "Name", "Email", "Phone", "Address", "Action"];
-  const reload = () => window.location.reload();
+  // const reload = () => window.location.reload();
   const validateuser = (item) => {
     const errors = {};
     if (!item.name && !formValue.name) {
@@ -35,6 +36,11 @@ const Home = () => {
     }
     if (!item.phone && !formValue.phone) {
       errors.phone = "Please Enter Employee phone";
+    }
+    if (item.phone) {
+      if (!/^[0-9]{1,45}$/i.test(item.phone)) {
+        errors.phone = "Invalid Phone number";
+      }
     }
     if (!item.email && !formValue.email) {
       errors.email = "Please Enter Email ID";
@@ -119,9 +125,14 @@ const Home = () => {
   const hideModal = () => {
     checkToggle(false);
   };
-
+  const deleteUsersArray = [];
   const deleteSelectedUser = (e) => {
-    console.log(e);
+    e.data.forEach(function (index) {
+      const userIDS = allusers[index.index].id;
+      deleteUsersArray.push(userIDS);
+      dispatch(deleteUserStart(deleteUsersArray));
+    });
+    setTimeout(() => toast.success("User Deleted Successfully"), 500);
   };
 
   return (

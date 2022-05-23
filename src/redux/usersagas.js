@@ -112,8 +112,14 @@ function* onLogOutUsersStartAsync() {
 
 function* onDeleteUser() {
   while (true) {
-    const { payload: userId } = yield take(types.DELETE_USER_START);
-    yield call(onDeleteUserStartAsync, userId);
+    const { payload } = yield take(types.DELETE_USER_START);
+    if (payload.length) {
+      for (let res of payload) {
+        yield call(onDeleteUserStartAsync, res);
+      }
+    } else {
+      yield call(onDeleteUserStartAsync, payload);
+    }
   }
 }
 
