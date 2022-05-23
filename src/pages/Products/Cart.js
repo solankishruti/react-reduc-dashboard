@@ -4,6 +4,7 @@ import MUIDataTable from "mui-datatables";
 import productlogo from "../../public/dist/img/product.png";
 import { MDBBtn, MDBIcon } from "mdb-react-ui-kit";
 import { deleteCartstart } from "../../redux/actions";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const columns = [
@@ -19,13 +20,10 @@ const Cart = () => {
   const dispatch = useDispatch();
   const DeleteCart = (item) => {
     dispatch(deleteCartstart(item));
+    toast.success("Item removed successfully");
   };
 
   const cart_data = JSON.parse(localStorage.getItem("Cart"));
-  const data = "";
-  if (cart_data) {
-    // const data = ;
-  }
   return (
     <div className="content-wrapper">
       <div className="content">

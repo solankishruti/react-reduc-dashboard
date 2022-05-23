@@ -26,7 +26,7 @@ const ProductInfo = () => {
   }, [dispatch, ids]);
 
   const product_data = JSON.parse(localStorage.getItem("view_product"));
-  console.log(product_data);
+  // console.log(product_data);
   return (
     <div className="content-wrapper">
       <div className="content">

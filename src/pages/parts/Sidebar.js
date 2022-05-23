@@ -1,10 +1,11 @@
 import React from "react";
 import logo from "../../public/dist/img/AdminLTELogo.png";
 import userlogo from "../../public/dist/img/user2-160x160.jpg";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../../redux/actions";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const history = useNavigate();
@@ -18,7 +19,7 @@ const Sidebar = () => {
   const User_email = localStorage.getItem("userData");
   return (
     <aside className="main-sidebar sidebar-dark-primary elevation-4">
-      <Link to={"/dashboard"} className="brand-link">
+      <NavLink to={"/dashboard"} className="brand-link">
         <img
           src={logo}
           alt="AdminLTE"
@@ -26,7 +27,7 @@ const Sidebar = () => {
           style={{ opacity: 0.8 }}
         />
         <span className="brand-text font-weight-light">AdminLTE 3</span>
-      </Link>
+      </NavLink>
 
       <div className="sidebar">
         <div className="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -44,51 +45,66 @@ const Sidebar = () => {
             data-accordion="false"
           >
             <li className="nav-item">
-              <Link to="/dashboard">Dashboard</Link>
+              <NavLink to="/dashboard" className="nav-link">
+                <p>Dashboard</p>
+              </NavLink>
             </li>
 
             <li className="nav-item">
-              <Link to={"#"} className="nav-link">
+              <NavLink to={"#"} className="nav-link">
                 {/* <i className="nav-icon fas fa-book"></i> */}
                 <p>
                   Users
                   <i className="fas fa-angle-left right"></i>
                 </p>
-              </Link>
+              </NavLink>
               <ul className="nav nav-treeview">
                 <li className="nav-item">
-                  <Link to="/home" className="nav-link">
+                  <NavLink to="/home" className="nav-link">
                     All Users
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="nav-item">
-                  <Link to="/addUser" className="nav-link">
+                  <NavLink to="/addUser" className="nav-link">
                     Add User
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             </li>
             <li className="nav-item">
-              <Link to={"#"} className="nav-link">
+              <NavLink to={"#"} className="nav-link">
+                {/* <i className="nav-icon fas fa-book"></i> */}
                 <p>
                   Products
                   <i className="fas fa-angle-left right"></i>
                 </p>
-              </Link>
+              </NavLink>
               <ul className="nav nav-treeview">
                 <li className="nav-item">
-                  <Link to="/allProducts">All Products</Link>
+                  <NavLink to="/allProducts" className="nav-link">
+                    All Products
+                  </NavLink>
                 </li>
-                <li className="nav-item"></li>
               </ul>
             </li>
+            <li className="nav-item">
+              <NavLink to="/about" className="nav-link">
+                <p>About</p>
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/cart" className="nav-link">
+                <p>Cart</p>
+                {numberCart !== "0" ? (
+                  <span className="right badge badge-success">
+                    {numberCart}
+                  </span>
+                ) : (
+                  ""
+                )}
+              </NavLink>
+            </li>
             <li className="nav-item"></li>
-            <li className="nav-item">
-              <Link to="/about">About</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/cart">Cart [{numberCart}] </Link>
-            </li>
             <li className="nav-item">
               <p className="nav-link" onClick={() => handleLogout()}>
                 Logout

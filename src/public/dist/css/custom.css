@@ -10,3 +10,10 @@ a.nav-link {
     background-color: rgba(255,255,255,.1)!important;
     color: #fff!important;
 }
+
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover{
+    color: #fff!important;
+}
+p.nav-link{
+    cursor: pointer;
+}

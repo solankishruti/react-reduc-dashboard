@@ -12,6 +12,8 @@ const Login = () => {
   });
 
   const handleChange = (e) => {
+    console.log(error);
+    // toast.dismiss();
     userLogin({
       ...user,
       [e.target.name]: e.target.value,
@@ -23,6 +25,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const handleSubmit = (e) => {
+    // toast.dismiss();
     e.preventDefault();
     if (user) {
       dispatch(loadUsersByIDStart(user));
@@ -31,16 +34,18 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (login) {
-      if (!loggedin) {
-        toast.error(error);
-        history("/");
-      } else {
+    if (login && loggedin !== "processing") {
+      if (loggedin) {
+        toast.success("Logged in");
         history("/dashboard");
         localStorage.setItem("userData", user.email);
+      } else {
+        toast.error(error);
+        history("/");
+        checkLogin(false);
       }
     }
-  }, [login, error, history, loggedin, user.email]);
+  }, [error, history, loggedin, user.email, login]);
 
   return (
     <div className="hold-transition login-page">

@@ -19,6 +19,11 @@ const usersReducer = (state = initialState, action) => {
     case types.GET_SINGLE_USER_START:
     case types.LOAD_SINGLE_PRODUCT_START:
     case types.LOAD_USERS_BY_ID_START:
+      return {
+        ...state,
+        loading: true,
+        loggedin: "processing",
+      };
     case types.LOGOUT_USER_START:
     case types.ADD_CART_START:
     case types.DELETE_CART_START:
@@ -136,6 +141,7 @@ const usersReducer = (state = initialState, action) => {
         state.Carts.push(cart);
       } else {
         let check = false;
+        // eslint-disable-next-line
         state.Carts.map((item, key) => {
           if (item.id === action.payload.id) {
             state.Carts[key].quantity++;
