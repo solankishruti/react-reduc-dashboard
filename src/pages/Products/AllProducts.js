@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadProductsStart, addCardStart } from "../../redux/actions";
-import { MDBBtn, MDBIcon, MDBSpinner } from "mdb-react-ui-kit";
+import { MDBBtn, MDBIcon, MDBSpinner, MDBTooltip } from "mdb-react-ui-kit";
 import MUIDataTable from "mui-datatables";
 import { Link } from "react-router-dom";
 import productlogo from "../../public/dist/img/product.png";
 import { toast } from "react-toastify";
+
 const AllProducts = () => {
   const dispatch = useDispatch();
   const { allProducts, loading } = useSelector((state) => state.data);
@@ -52,29 +53,30 @@ const AllProducts = () => {
                     item.size,
                     item.color,
                     <div className="row actionbtns">
+                      <Link to={`/productInfo/${item.id}`}>
+                        <MDBTooltip title="View" tag="p">
+                          <MDBIcon
+                            fas
+                            icon="eye"
+                            style={{ color: "#3b5998", marginBottom: "10px" }}
+                            size="lg"
+                          />
+                        </MDBTooltip>
+                      </Link>{" "}
                       <MDBBtn
-                        className="m-1"
                         tag="a"
                         color="none"
                         onClick={() => AddCart(item)}
                       >
-                        <MDBIcon
-                          fas
-                          icon="plus-circle"
-                          style={{ color: "#dd4b39" }}
-                          size="lg"
-                        />
-                      </MDBBtn>{" "}
-                      <Link to={`/productInfo/${item.id}`}>
-                        {/* <MDBTooltip title="View" tag="a"> */}
-                        <MDBIcon
-                          fas
-                          icon="eye"
-                          style={{ color: "#3b5998", marginBottom: "10px" }}
-                          size="lg"
-                        />
-                        {/* </MDBTooltip> */}
-                      </Link>
+                        <MDBTooltip title="Add to cart" tag="p">
+                          <MDBIcon
+                            fas
+                            icon="plus-circle"
+                            style={{ color: "#dd4b39" }}
+                            size="lg"
+                          />
+                        </MDBTooltip>
+                      </MDBBtn>
                     </div>,
                   ];
                 })}

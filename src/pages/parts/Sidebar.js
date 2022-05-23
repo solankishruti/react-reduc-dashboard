@@ -34,7 +34,7 @@ const Sidebar = () => {
           <div className="image">
             <img src={userlogo} className="img-circle elevation-2" alt="User" />
           </div>
-          <div className="info">{User_email}</div>
+          <div className="info">{User_email.split("@")[0]}</div>
         </div>
 
         <nav className="mt-2">
@@ -105,7 +105,7 @@ const Sidebar = () => {
               </NavLink>
             </li>
             <li className="nav-item"></li>
-            <li className="nav-item">
+            <li className="nav-item" style={{ textAlign: "center" }}>
               <p className="nav-link" onClick={() => handleLogout()}>
                 Logout
               </p>

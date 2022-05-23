@@ -17,3 +17,12 @@ a.nav-link {
 p.nav-link{
     cursor: pointer;
 }
+li.nav-item {
+    text-align: left;
+}
+.MuiTableBody-root .row>*{
+    width: auto;
+}
+.user-panel, .user-panel .info{
+    color: #fff;
+}

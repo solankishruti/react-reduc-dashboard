@@ -13,6 +13,7 @@ import Header from "./component/Header";
 // eslint-disable-next-line
 import Footer from "./pages/parts/Footer";
 import PrivateRoute from "./component/PrivateRouter";
+import PrivateLoginRoute from "./component/PrivateLoginRouter";
 import AllProducts from "./pages/Products/AllProducts";
 import ProductInfo from "./pages/Products/ProductInfo";
 import Cart from "./pages/Products/Cart";
@@ -28,7 +29,9 @@ function App() {
         {checkLoggedin ? <Header /> : ""}
         <Routes>
           <>
-            <Route exact path="/" element={<Login />} />
+            <Route path="/" element={<PrivateLoginRoute />}>
+              <Route exact path="/" element={<Login />} />
+            </Route>
             <Route path="/" element={<PrivateRoute />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/home" element={<Home />} />
