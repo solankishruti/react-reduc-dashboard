@@ -12,6 +12,8 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const handleLogout = () => {
     localStorage.removeItem("userData");
+    localStorage.removeItem("numberCart");
+    localStorage.removeItem("Cart");
     dispatch(logoutUser());
     history("/");
   };

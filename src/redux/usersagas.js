@@ -30,6 +30,8 @@ import {
   loadSingleProductError,
   addCard,
   deleteCart,
+  IncreaseQuantity,
+  DecreaseQuantity,
 } from "./actions";
 import {
   loadUsersApi,
@@ -168,8 +170,24 @@ function* onDeletetoCart({ payload }) {
   yield put(deleteCart(payload));
 }
 
+function* onIncrementtoCart({ payload }) {
+  yield put(IncreaseQuantity(payload));
+}
+
+function* onDecrementtoCart({ payload }) {
+  yield put(DecreaseQuantity(payload));
+}
+
 function* onAddCart() {
   yield takeLatest(types.ADD_CART_START, onAddtoCart);
+}
+
+function* onIncrementCart() {
+  yield takeLatest(types.INCREASE_QUANTITY_START, onIncrementtoCart);
+}
+
+function* onDecrementCart() {
+  yield takeLatest(types.DECREASE_QUANTITY_START, onDecrementtoCart);
 }
 
 function* onDeleteCart() {
@@ -223,6 +241,8 @@ const userSagas = [
   fork(onLoadSingleProduct),
   fork(onAddCart),
   fork(onDeleteCart),
+  fork(onIncrementCart),
+  fork(onDecrementCart),
 ];
 
 export default function* rootSaga() {

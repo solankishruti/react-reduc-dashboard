@@ -26,6 +26,8 @@ const usersReducer = (state = initialState, action) => {
       };
     case types.LOGOUT_USER_START:
     case types.ADD_CART_START:
+    case types.INCREASE_QUANTITY_START:
+    case types.DECREASE_QUANTITY_START:
     case types.DELETE_CART_START:
     case types.CREATE_USER_START:
     case types.DELETE_USER_START:
@@ -42,7 +44,7 @@ const usersReducer = (state = initialState, action) => {
         loggedin: true,
         users: state.users,
         allusers: action.payload,
-        cart: state.cart,
+        Carts: state.Carts,
       };
     case types.LOAD_PRODUCTS_SUCCESS:
       return {
@@ -51,7 +53,7 @@ const usersReducer = (state = initialState, action) => {
         loggedin: true,
         users: state.users,
         allProducts: action.payload,
-        cart: state.cart,
+        Carts: state.Carts,
       };
     case types.GET_SINGLE_USER_SUCCESS:
       return {
@@ -186,6 +188,25 @@ const usersReducer = (state = initialState, action) => {
         Carts: state.Carts.filter((item) => {
           return item.id !== state.Carts[action.payload].id;
         }),
+      };
+    case types.INCREASE_QUANTITY:
+      state.numberCart++;
+      state.Carts[action.payload].quantity++;
+      localStorage.setItem("numberCart", state.numberCart);
+      localStorage.setItem("Cart", JSON.stringify(state.Carts));
+      return {
+        ...state,
+      };
+    case types.DECREASE_QUANTITY:
+      let quantity = state.Carts[action.payload].quantity;
+      if (quantity > 1) {
+        state.numberCart--;
+        state.Carts[action.payload].quantity--;
+        localStorage.setItem("numberCart", state.numberCart);
+        localStorage.setItem("Cart", JSON.stringify(state.Carts));
+      }
+      return {
+        ...state,
       };
     default:
       return state;

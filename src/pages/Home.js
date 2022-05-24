@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteUserStart,
@@ -17,6 +17,7 @@ import { useFormik } from "formik";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const nodeRef = useRef(null);
   const { allusers, loading, error } = useSelector((state) => state.data);
   const [togglemodal, checkToggle] = useState(false);
   const [toggleEditModal, checkEditToggle] = useState(false);
@@ -86,15 +87,9 @@ const Home = () => {
   const { name, email, phone, address } = formValue;
   useEffect(() => {
     dispatch(loadUsersStart());
-  }, [dispatch]);
-
-  useEffect(() => {
     error && toast.error(error);
-  }, [error]);
-
-  useEffect(() => {
     setFormValue({ ...singleUsers });
-  }, [singleUsers]);
+  }, [dispatch, error, singleUsers]);
 
   if (loading) {
     return (
@@ -114,7 +109,6 @@ const Home = () => {
     checkToggle(true);
   };
   const toggleEdit = (item) => {
-    console.log(item);
     checkEditToggle(true);
     dispatch(loadSingleUsersStart(item.id));
     setUserID(item.id);
@@ -126,12 +120,13 @@ const Home = () => {
     checkToggle(false);
   };
   const deleteUsersArray = [];
+
   const deleteSelectedUser = (e) => {
     e.data.forEach(function (index) {
       const userIDS = allusers[index.index].id;
       deleteUsersArray.push(userIDS);
-      dispatch(deleteUserStart(deleteUsersArray));
     });
+    dispatch(deleteUserStart(deleteUsersArray));
     setTimeout(() => toast.success("User Deleted Successfully"), 500);
   };
 
@@ -146,6 +141,7 @@ const Home = () => {
               id={UserID}
               email={userEmail}
               handleDeleet={handleDeleet}
+              nodeRef={nodeRef}
             ></Modals>
             <EditModal
               show={toggleEditModal}
@@ -155,6 +151,7 @@ const Home = () => {
               email={email}
               address={address}
               phone={phone}
+              nodeRef={nodeRef}
             ></EditModal>
             <div className="container" style={{ marginTop: "50px" }}>
               <MUIDataTable
@@ -180,7 +177,11 @@ const Home = () => {
                         </MDBTooltip>
                       </Link>{" "}
                       {/* <Link to={`/editUser/${item.id}`}> */}
-                      <Link to={"#"} onClick={() => toggleEdit(item)}>
+                      <MDBBtn
+                        tag="a"
+                        color="none"
+                        onClick={() => toggleEdit(item)}
+                      >
                         <MDBTooltip title="Edit" tag="p">
                           <MDBIcon
                             fas
@@ -189,7 +190,7 @@ const Home = () => {
                             size="lg"
                           />
                         </MDBTooltip>
-                      </Link>{" "}
+                      </MDBBtn>{" "}
                       <MDBBtn
                         tag="a"
                         color="none"

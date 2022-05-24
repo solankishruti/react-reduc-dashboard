@@ -143,3 +143,23 @@ export const deleteCart = (payload) => ({
   type: types.DELETE_CART,
   payload: payload,
 });
+
+export const IncreaseQuantityStart = (payload) => ({
+  type: types.INCREASE_QUANTITY_START,
+  payload: payload,
+});
+
+export const IncreaseQuantity = (payload) => ({
+  type: types.INCREASE_QUANTITY,
+  payload: payload,
+});
+
+export const DecreaseQuantityStart = (payload) => ({
+  type: types.DECREASE_QUANTITY_START,
+  payload: payload,
+});
+
+export const DecreaseQuantity = (payload) => ({
+  type: types.DECREASE_QUANTITY,
+  payload: payload,
+});
